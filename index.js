@@ -38,7 +38,7 @@ async function run(query, limit) {
         console.log(`Building job cards for page ${count+1}...`)
         await buildJobCardsForPage();
         console.log("Clicking next page button...")
-        await clickNextPageButton(continueLooping);
+        await clickNextPageButton();
 
         if (count == maxLimit) {
             console.log("max limit reached")
@@ -132,8 +132,8 @@ function timeout(ms) {
 }
 
 // Click next page button
-async function clickNextPageButton(continueLooping) {
-    let li = await driver.findElement(By.css('li[data-link="next_page"]'))
+async function clickNextPageButton() {
+    let li = await driver.findElement(By.css('li[data-link="next_page"]'));
     let next = await li.findElement(By.css('a[class="btn Pagination-link"]'));
     await next.click();
     console.log("politely waiting...")
