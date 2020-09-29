@@ -11,7 +11,7 @@ const {
 const fs = require('fs');
 
 // JSON2csv setup
-const fields = ['heading', 'daysLeft', 'verified', 'price', 'numBids', 'description', 'skills'];
+const fields = ['heading', 'daysLeft', 'verified', 'price', 'numBids', 'description', 'skills','link'];
 const opts = {
     fields
 }
@@ -109,6 +109,7 @@ async function buildJobCard(jobCard) {
             const skillText = await skill.getText();
             skillsList.push(skillText);
         }
+        const link = await jobCard.findElement(By.css('a[class="JobSearchCard-primary-heading-link"]')).getAttribute('href');
         const card = {
             href,
             heading,
@@ -117,7 +118,8 @@ async function buildJobCard(jobCard) {
             price,
             numBids,
             description,
-            skills: skillsList
+            skills: skillsList,
+            link
         }
         return card;
     }
